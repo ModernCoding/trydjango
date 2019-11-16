@@ -3,11 +3,15 @@ from .models import Product
 
 # Create your views here.
 def product_detail_view(request):
-  obj = Product.objects.get(id=1)
+  # obj = Product.objects.get(id=1)
   
   # context = {
   #   "title": obj.title,
   #   "description": obj.description,
   # }
   
-  return render(request, "product/detail.html", { "object": obj })
+  return render(
+      request,
+      "products/product_detail.html",
+      { "object": Product.objects.get(id=1) }
+    )
