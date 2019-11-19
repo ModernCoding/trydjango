@@ -33,6 +33,6 @@ urlpatterns = [
   path('about/', about_view),
   path('social/', social_view),
 
-  path('product/', product_detail_view),
+  path('products/<int:id>/', product_detail_view, name='product'),
   path('create/', product_create_view),
 ]

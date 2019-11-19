@@ -5,7 +5,7 @@ from .forms import ProductForm, RawProductForm
 
 # Create your views here.
 
-def product_detail_view(request):
+def product_detail_view(request, id):
   # obj = Product.objects.get(id=1)
   
   # context = {
@@ -16,30 +16,30 @@ def product_detail_view(request):
   return render(
       request,
       "products/product_detail.html",
-      { "object": Product.objects.get(id=1) }
+      { "object": Product.objects.get(id=id) }
     )
 
 
-def product_create_view(request):
+# def product_create_view(request):
 
-  form = RawProductForm()
+#   form = RawProductForm()
   
-  if request.method == "POST":
-    form = RawProductForm(request.POST)
+#   if request.method == "POST":
+#     form = RawProductForm(request.POST)
 
-    if form.is_valid():
-      print(form.cleaned_data)
-      Product.objects.create(**form.cleaned_data)
+#     if form.is_valid():
+#       print(form.cleaned_data)
+#       Product.objects.create(**form.cleaned_data)
 
-    # else:
-    #   print(form.errors)
+#     # else:
+#     #   print(form.errors)
 
 
-  return render(
-      request,
-      "products/product_create.html",
-      { "form": form }
-    )
+#   return render(
+#       request,
+#       "products/product_create.html",
+#       { "form": form }
+#     )
 
 
 # def product_create_view(request):
@@ -56,16 +56,26 @@ def product_create_view(request):
 #     )
 
 
-# def product_create_view(request):
+def product_create_view(request):
 
-#   form = ProductForm(request.POST or None)
+  initial_data = {
+    "title": "From zero to hero"
+  }
 
-#   if form.is_valid():
-#     form.save()
-#     form = ProductForm()
+  # obj = Product.objects.get(id=2)
 
-#   return render(
-#       request,
-#       "products/product_create.html",
-#       { "form": form }
-#     )
+  form = ProductForm(
+      request.POST or None,
+      initial=initial_data,
+      # instance=obj
+    )
+
+  if form.is_valid():
+    form.save()
+    form = ProductForm()
+
+  return render(
+      request,
+      "products/product_create.html",
+      { "form": form }
+    )
