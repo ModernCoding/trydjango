@@ -1,4 +1,5 @@
-from django.shortcuts import render
+# from django.http import Http404, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .models import Product
 from .forms import ProductForm, RawProductForm
 
@@ -6,8 +7,15 @@ from .forms import ProductForm, RawProductForm
 # Create your views here.
 
 def product_detail_view(request, id):
-  # obj = Product.objects.get(id=1)
+
+  # try:
+  #   obj = Product.objects.get(id=id)
+
+  # except Product.DoesNotExist:
+  #   # raise Http404
+  #   return HttpResponse("<h1>DTC</h1>")
   
+
   # context = {
   #   "title": obj.title,
   #   "description": obj.description,
@@ -16,7 +24,8 @@ def product_detail_view(request, id):
   return render(
       request,
       "products/product_detail.html",
-      { "object": Product.objects.get(id=id) }
+      # { "object": obj } # context
+      { "object": get_object_or_404(Product, id=id) }
     )
 
 
