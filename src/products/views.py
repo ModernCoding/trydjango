@@ -6,6 +6,17 @@ from .forms import ProductForm, RawProductForm
 
 # Create your views here.
 
+def product_list_view(request):
+  
+  queryset = Product.objects.all()
+  
+  return render(
+      request,
+      "products/product_list.html",
+      { "object_list": Product.objects.all() }
+    )
+
+
 def product_detail_view(request, id):
 
   # try:
