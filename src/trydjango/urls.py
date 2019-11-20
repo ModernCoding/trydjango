@@ -29,5 +29,6 @@ urlpatterns = [
   path('about/', about_view),
   path('social/', social_view),
 
-  path('products/', include('products.urls'))
+  path('products/', include('products.urls')),
+  path('blog/', include('blog.urls'))
 ]
