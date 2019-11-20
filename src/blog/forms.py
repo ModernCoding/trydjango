@@ -2,7 +2,7 @@ from django import forms
 
 from .models import Article
 
-class BlogForm(forms.ModelForm):
+class ArticleModelForm(forms.ModelForm):
   
   title         = forms.CharField(
       widget=forms.TextInput(attrs={
@@ -25,7 +25,8 @@ class BlogForm(forms.ModelForm):
 
     fields = [
       'title',
-      'content: '
+      'content',
+      'active'
     ]
 
 
