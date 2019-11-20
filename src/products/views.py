@@ -101,6 +101,26 @@ def product_create_view(request):
     )
 
 
+def product_update_view(request, id):
+
+  obj = get_object_or_404(Product, id=id)
+
+  form = ProductForm(
+      request.POST or None,
+      initial=initial_data,
+      instance=obj
+    )
+
+  if form.is_valid():
+    form.save()
+
+  return render(
+      request,
+      "products/product_create.html",
+      { "form": form }
+    )
+  
+
 def product_delete_view(request, id):
 
   obj = get_object_or_404(Product, id=id)
