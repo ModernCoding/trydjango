@@ -36,12 +36,18 @@ urlpatterns = [
   path('about/', about_view),
   path('social/', social_view),
 
-  path('products/', product_list_view, name='products'),
-  path('products/<int:id>/', product_detail_view, name='product'),
+  path('products/', product_list_view, name='product-list'),
+  
+  path(
+    'products/<int:id>/',
+    product_detail_view,
+    name='product-detail'
+  ),
   
   path(
     'products/<int:id>/delete/',
-    product_delete_view, name='product-delete'
+    product_delete_view,
+    name='product-delete'
   ),
   
   path('create/', product_create_view),
