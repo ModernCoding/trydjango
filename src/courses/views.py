@@ -15,6 +15,19 @@ from .forms import CourseModelForm
 
 
 # Base view class = View
+class CourseObjectMixin(object):
+  model = Course
+  lookup = 'id'
+
+  def get_object(self):
+    id = self.kwargs.get(self.lookup)
+    obj = None
+    
+    if id is not None:
+      obj = get_object_or_404(self.model, id=id)
+
+    return obj
+
 
 class CourseView(View):
   
@@ -69,20 +82,9 @@ class CourseCreateView(View):
     return render(request, self.template_name, { "form": form })
 
 
-class CourseUpdateView(View):
+class CourseUpdateView(CourseObjectMixin, View):
   
   template_name = 'courses/course_create.html'
-
-  def get_object(self):
-
-    id = self.kwargs.get("id")
-
-    if id is None:
-      return None
-
-    else:
-      return get_object_or_404(Course, id=id)
-
 
   def get(self, request, id=None, *args, **kwargs):
 
@@ -114,20 +116,9 @@ class CourseUpdateView(View):
     return render(request, self.template_name, context)
 
 
-class CourseDeleteView(View):
+class CourseDeleteView(CourseObjectMixin, View):
   
   template_name = 'courses/course_delete.html'
-
-  def get_object(self):
-
-    id = self.kwargs.get("id")
-
-    if id is None:
-      return None
-
-    else:
-      return get_object_or_404(Course, id=id)
-
 
   def get(self, request, id=None, *args, **kwargs):
 
