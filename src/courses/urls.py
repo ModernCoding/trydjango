@@ -3,9 +3,8 @@ from django.urls import path
 from .views import (
     # my_fbv,
     CourseView,
+    # MyCourseListView,
     CourseCreateView,
-    CourseDetailView,
-    CourseListView,
     CourseUpdateView,
     CourseDeleteView
   )
@@ -17,34 +16,33 @@ urlpatterns = [
   # path('', my_fbv, name='courses-list'),
   path(
     '',
-    CourseView.as_view(template_name='contact.html'),
+    # CourseView.as_view(template_name='contact.html'),
+    # MyCourseListView.as_view(),
+    CourseView.as_view(),
     name='courses-list'
   ),
   
-  # path('', CourseListView.as_view(), name='course-list'),
-  
   path(
-    # '<int:pk>/',
     '<int:id>/',
-    CourseDetailView.as_view(),
-    name='course-detail'
+    CourseView.as_view(),
+    name='courses-detail'
   ),
   
   path(
     'create/',
     CourseCreateView.as_view(),
-    name='course-create'
+    name='courses-create'
   ),
   
   path(
     '<int:id>/update',
     CourseUpdateView.as_view(),
-    name='course-update'
+    name='courses-update'
   ),
   
   path(
     '<int:id>/delete',
     CourseDeleteView.as_view(),
-    name='course-delete'
+    name='courses-delete'
   )
 ]

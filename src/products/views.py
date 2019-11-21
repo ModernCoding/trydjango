@@ -8,7 +8,7 @@ from .forms import ProductForm, RawProductForm
 
 def product_list_view(request):
   
-  queryset = Product.objects.all()
+  # queryset = Product.objects.all()
   
   return render(
       request,
